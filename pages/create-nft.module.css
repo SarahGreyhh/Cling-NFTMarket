@@ -1,0 +1,32 @@
+.input {
+    background-color: rgb(243, 243, 243);
+    height: 2.5rem;
+    padding-left: 1rem;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 0px 0px 1px rgb(0 0 0 / 4%), 0px 2px 3px rgb(0 0 0 / 7%), 0px 6px 6px rgb(0 0 0 / 4%), 0px 12px 12px rgb(0 0 0 / 3%), 0px 20px 24px rgb(0 0 0 / 3%);
+}
+
+.inputImage {
+    
+    display: flex;
+    align-items: center;
+    
+    
+   
+    border-radius: 2px;
+    border: none;
+
+}
+.buybutton {
+    background-color: rgb(69, 226, 134);
+    border-radius: 10px;
+    height: 3rem;
+    border: none;
+    box-shadow: 0px 0px 0px 1px rgb(0 0 0 / 4%), 0px 2px 3px rgb(0 0 0 / 7%), 0px 6px 6px rgb(0 0 0 / 4%), 0px 12px 12px rgb(0 0 0 / 3%), 0px 20px 24px rgb(0 0 0 / 3%);
+}
+
+.InnerContainer {
+    min-height: 40rem;
+}
+
