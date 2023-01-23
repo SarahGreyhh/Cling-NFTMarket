@@ -150,16 +150,15 @@ const AllTabs = [
   { Id: 4, Title: "Offers", Content: <Tab /> },
 ];
 
-export default function Asset() {
+export default function Asset({selectedNft}) {
   return (
     <AssetEl>
       <Head>NFT ITEM</Head>
       <SectionContainer>
         <LeftSection>
           <ImageEl>
-            <Image
-              src="/images/nft/bking.png"
-              layout="responsive"
+          <Image
+              src={selectedNft?.Image}
               width="1000px"
               height="1000px"
             />

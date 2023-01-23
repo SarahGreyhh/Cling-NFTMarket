@@ -141,7 +141,7 @@ export default function Header({ mobileMenu }) {
               <NavItem href="/create-nft">Create NFT</NavItem>
             </li>
             <li>
-              <NavItem href="#">Owned NFTs</NavItem>
+              <NavItem href="/my-nfts">Owned NFTs</NavItem>
             </li>
             <li>
             <ConnectButton/>

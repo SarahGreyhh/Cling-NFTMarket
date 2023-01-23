@@ -134,6 +134,7 @@ const Line = styled.span`
 const Img = styled.div`
   width: 100%;
   height: 100%;
+  position:"relative"
 `;
 
 const Items = [
@@ -144,7 +145,7 @@ const Items = [
     Title: "UFC 271",
     Author: "UFC",
 
-    ImageSrc: "/images/slider/Kaeru.png",
+    ImageSrc: "/images/slider/5.png",
   },
   {
     Id: 2,
@@ -153,7 +154,7 @@ const Items = [
     Title: "Slide 2",
     Author: "UFC",
 
-    ImageSrc: "/images/slider/3.jpeg",
+    ImageSrc: "/images/slider/5.png",
   },
   {
     Id: 3,
@@ -162,7 +163,7 @@ const Items = [
     Title: "Slide 3",
     Author: "UFC",
 
-    ImageSrc: "/images/slider/4.jpg",
+    ImageSrc: "/images/slider/5.png",
   },
 ];
 
@@ -224,7 +225,7 @@ export default function Hero() {
         </Lines>
         <ImgContainer>
           <Img>
-            <Image layout="fill" src={CurSlide.ImageSrc} />
+            <Image layout="fill" src={CurSlide.ImageSrc}  />
           </Img>
         </ImgContainer>
       </Slider>

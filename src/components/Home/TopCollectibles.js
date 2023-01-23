@@ -143,3 +143,11 @@ export default function TopCollectibles({}) {
   </TopCollectiblesEl>
   );
 }
+
+// you are rendering this file also in detial page? right! This is on home page
+//the individual asset file is the one named index.js which i should pass props to it. I know i am wrong on the individual items page, I didnt know how to do it thats why i wanted to share complete code but this is my pvt project )
+// it's ok. I am just figuring out the list of items you're rendering on the detial page. The info rendered on details page is coming from index.js. Both The Top Collectibles and Index are same
+// you have to make two files. ToCollectibles files for home and another file for detail where th only itemting that's e. There are 2 files. But the way they are fectich and rendering the data is the same.
+// in detail page you don't have tofetch the data for it. becuase on lick you sending the item={nft} as prop. 
+// I think we have a misunderstanding )
+//The NFTCard is just that one small card with image etc. Its the one which receives the prop. The index.js , is a seperate page and isnt taking

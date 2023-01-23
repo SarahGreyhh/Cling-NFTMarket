@@ -18,6 +18,7 @@ import axios from 'axios'
 import Web3Modal from 'web3modal'
 import NFTMarketplace from '../../NFTMarketplace.json'
 import Button from "../../../src/components/styled/Button.styled";
+import AssetNFT from "../../../src/components/Asset"
 
 
 const BidStickyEl = styled.article`
@@ -229,14 +230,18 @@ const AllTabs = [
 
 
 
-export default function Asset ({}) {
+const Nft = () => {
   
 
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
+  const [selectedNft, setSelectedNft] = useState()
+  const router = useRouter()
   useEffect(() => {
     loadNFTs()
-  }, [])
+  }, [router])
+
+
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
    // const provider = new ethers.providers.JsonRpcProvider(`https://goerli.infura.io/v3/ecce808847e94ac0acbf82a064057d47`)
@@ -273,187 +278,45 @@ export default function Asset ({}) {
     }))
     setNfts(items)
     setLoadingState('loaded') 
+   
   
   
 
 
     
   }
-  console.log(nfts)
 
   
+ console.log(nfts)
 
   
-  async function buyNft(nft) {
-    /* needs the user to sign the transaction, so will use Web3Provider and sign it */
-    const web3Modal = new Web3Modal()
-    const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
-    const signer = provider.getSigner()
-    const contract = new ethers.Contract(process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS, NFTMarketplace.abi, signer)
+  useEffect(()=> {
+    if (!nfts) return
+    ;(async()=> {
 
-    /* user will be prompted to pay the asking proces to complete the transaction */
-    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')   
-    const transaction = await contract.createMarketSale(nft.tokenId, {
-      value: price
-    })
-    await transaction.wait()
-    loadNFTs()
-  }
+      const nftItems = await nfts.getAll()
+      
+      
+      const selectedNftArray = nftItems.filter(
+         (nft) => nft.tokenId === router.query.tokenId
+      )
+      
+      setSelectedNft(selectedNftArray[0])
 
-  const mynfts = [nfts]
-  
-  const array = [
-                  {"taxonomy":"category","rest_base":"categories","id":[1,2]},
-                  {"taxonomy":"post_tag","rest_base":"tags","id":[4,5,6,7]}
-                ];
+     
+    })()
 
-
-  const result = array.flatMap( ({ rest_base, id }) => 
-  id.map(v => `example.com/wp-json/wp/v2/${rest_base}/${v}`) // wrap the string with a fetch or similar function
-  );
-
-  //console.log(result);  
+    
+  }, []
+ 
+  )
   
 
  
-  return (
-    <AssetEl>
-      
-    
-
-
-
-
-
-          <div className="flex justify-center">
-      <div className="px-4" style={{ maxWidth: '1600px' }}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-          {
-
-          
-
-
-            nfts.map((nft, i) => 
-            (
-              <div key={i} className="border shadow rounded-xl overflow-hidden">
-                  <Head>NFT ITEM</Head>
-                  {console.log(nft)}
-      <SectionContainer>
-        <div>
-      
-          
-        </div>
-        <LeftSection>
-        <ImageEl>
-        <Image src={nft.image} width="1000px" height="1000px" />
-        
-  
-          </ImageEl>
-          <ChainLink>
-            View Crypto.org Chain details <HiOutlineExternalLink />
-          </ChainLink>
-        </LeftSection>
-        <RightSection>
-          <BackBtn>
-            <AiFillCaretLeft />
-            Back
-          </BackBtn>
-          <TopBtns>
-          <MoreBtn>
-              <BsThreeDots />
-            </MoreBtn>
-          </TopBtns>
-          <AuthorContainer>
-            <AvatarEl>
-              <Image src="/images/avatar/newk3d.png" width="50" height="50" />
-            </AvatarEl>
-            <span>
-              <CreatorLabel>Creator</CreatorLabel>
-              <UsernameEl>{nft.seller}</UsernameEl>
-            </span>
-          </AuthorContainer>
-          <EditionEl> Editions Minted</EditionEl>
-          <span>
-            <Title>{nft.name}</Title>
-            <MarketPlace>Marketplace</MarketPlace>
-          </span>
-          <AcOfferLabel>Accepting Offers</AcOfferLabel>
-          <Des>
-          {nft.description}
-          </Des>
-          <TagContainer>
-            <Tag>Crypto</Tag>
-          </TagContainer>
-          
-          <Tabs mt="1rem" data={AllTabs} />
-        </RightSection>
-      </SectionContainer>
-      <BidStickyEl>
-      <LeftSectionBid>
-        <ThumbEl>
-          <Image src="/images/nft/bking.png" width="80px" height="80px" />
-        </ThumbEl>
-        <Info>
-          <EditionElBid>Edition 17 of 371</EditionElBid>
-          <TitleBid>KING BITCOIN</TitleBid>
-        </Info>
-      </LeftSectionBid>
-      <RightSectionBid>
-        <PlaceBidBtn onClick={() => buyNft(nft)}>Place a bid</PlaceBidBtn>
-        <TextEl>A 10% royalty goes to the creator for future resale</TextEl>
-      </RightSectionBid>
-    </BidStickyEl>
-            
-
-                
-                <div className="p-4">
-                  <p style={{ height: '64px' }} className="text-2xl font-semibold">{nft.name}</p>
-                
-                </div>
-                <div className="p-4 bg-black">
-                  <p className="text-2xl font-bold text-white">{nft.price} ETH</p>
-                  <button className="mt-4 w-full bg-green-500 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-   
-    </AssetEl>
-  );
-
+  return <AssetNFT selectedNft={selectedNft}/>
 
 }
-
+export default Nft
 
 
 
