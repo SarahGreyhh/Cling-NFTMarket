@@ -8,6 +8,7 @@ import NFTMarketplace from '../../NFTMarketplace.json'
 import AssetNFT from "../../../src/components/Asset"
 
 
+
  
   export const fetchNfts = async() => {
 
