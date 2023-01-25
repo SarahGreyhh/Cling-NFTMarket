@@ -130,7 +130,7 @@ export default function Header({ mobileMenu }) {
       
       <Center>
         <Logo src="/images/cryptoLogo.png" />
-        <LogoText href="/">Cling NFT</LogoText>
+        <LogoText href="/">Happy Happy</LogoText>
         <SearchBar />
         <Nav>
           <ul>
