@@ -224,15 +224,8 @@ const AllTabs = [
 ];
 
 
-
-
-
-
-
-
-const Nft = () => {
+export const Nft = () => {
   
-
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
   const [selectedNft, setSelectedNft] = useState()
@@ -241,15 +234,12 @@ const Nft = () => {
     loadNFTs()
   }, [router])
 
-
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
    // const provider = new ethers.providers.JsonRpcProvider(`https://goerli.infura.io/v3/ecce808847e94ac0acbf82a064057d47`)
     const provider = new ethers.providers.JsonRpcProvider()
     const contract = new ethers.Contract(process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS, NFTMarketplace.abi, provider)
     const data = await contract.fetchMarketItems()
-    
-
     /*
     *  map over items returned from smart contract and format 
     *  them as well as fetch their token metadata
@@ -270,47 +260,17 @@ const Nft = () => {
                     description: meta.data.description,
                     image: meta.data.image,
       }
-     
 
-      
       return item
      
     }))
     setNfts(items)
     setLoadingState('loaded') 
-   
-  
-  
-
-
-    
   }
 
   
  console.log(nfts)
 
-  
-  useEffect(()=> {
-    if (!nfts) return
-    ;(async()=> {
-
-      const nftItems = await nfts.getAll()
-      
-      
-      const selectedNftArray = nftItems.filter(
-         (nft) => nft.tokenId === router.query.tokenId
-      )
-      
-      setSelectedNft(selectedNftArray[0])
-
-     
-    })()
-
-    
-  }, []
- 
-  )
-  
 
  
   return <AssetNFT selectedNft={selectedNft}/>
