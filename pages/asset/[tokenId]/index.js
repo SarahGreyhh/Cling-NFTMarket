@@ -38,12 +38,13 @@ export const getStaticPaths = async() => {
     return item
   })) 
 
-  
+   console.log(items)
    const paths = items.map(nft => {
     return{
       params: { tokenId: nft.tokenId.toString()}
     }
    })
+  
 
    return {
     paths,
@@ -90,6 +91,9 @@ export const getStaticProps = async(context) => {
 }
 
  const Nft = (nft) => {
+  useEffect(() => {
+    getStaticPfdaths()
+  }, [])
 
   return <div>{nft.name}</div>
 }
